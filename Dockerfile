@@ -19,14 +19,10 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-4.
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
      /opt/conda/bin/conda install conda-build
-     # && \
-     # /opt/conda/bin/conda create -y --name fastai python=3.5.2 numpy pyyaml scipy ipython mkl&& \
-     # /opt/conda/bin/conda clean -ya
 
-RUN mkdir workspace && cd workspace && mkdir fast.ai
-RUN git clone https://github.com/fastai/fastai.git
-RUN cd fastai/ && ls && /opt/conda/bin/conda env create
-#RUN source activate fastai
+RUN mkdir workspace
+RUN git clone https://github.com/fastai/fastai.git /workspace/fastai
+RUN cd /workspace/fastai/ && /opt/conda/bin/conda env create
 RUN /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/envs/fastai/bin:$PATH
